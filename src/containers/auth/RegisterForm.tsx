@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import AuthForm from "../../components/auth/AuthForm";
 
 type MyProps = {
-  form: { username: string; password: string };
+  form: { username: string; password: string; passwordConfirm: string };
   changeField: (form: string, key: string, value: string) => void;
   initializeForm: (form: string) => void;
 };

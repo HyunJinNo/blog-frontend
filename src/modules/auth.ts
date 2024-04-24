@@ -1,4 +1,4 @@
-import { produce } from "immer";
+import { Draft, produce } from "immer";
 
 const CHANGE_FIELD = "auth/CHANGE_FIELD" as const;
 const INITIALIZE_FORM = "auth/INITIALIZE_FORM" as const;
@@ -45,7 +45,7 @@ const initialState = {
 const auth = (state = initialState, action: Actions) => {
   switch (action.type) {
     case CHANGE_FIELD:
-      return produce<any>(state, (draft) => {
+      return produce(state, (draft: Draft<any>) => {
         draft[action.form][action.key] = action.value;
       });
     case INITIALIZE_FORM:
