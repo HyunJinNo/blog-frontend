@@ -1,0 +1,42 @@
+@import "./utils.scss";
+
+.AuthForm {
+  h3 {
+    margin: 0;
+    color: nth($gray, 9);
+    margin-bottom: 1rem;
+  }
+
+  form {
+    input {
+      font-size: 1rem;
+      border: none;
+      border-bottom: 1px solid nth($gray, 6);
+      padding-bottom: 0.5rem;
+      outline: none;
+      width: 100%;
+
+      &:focus {
+        color: nth($gray, 10);
+        border-bottom: 1px solid nth($gray, 8);
+      }
+
+      & + input {
+        margin-top: 1rem;
+      }
+    }
+  }
+
+  footer {
+    margin-top: 2rem;
+    text-align: right;
+    a {
+      color: nth($gray, 7);
+      text-decoration: underline;
+
+      &:hover {
+        color: nth($gray, 10);
+      }
+    }
+  }
+}
