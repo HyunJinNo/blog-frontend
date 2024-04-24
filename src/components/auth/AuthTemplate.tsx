@@ -8,7 +8,7 @@ const AuthTemplate = ({
     <div className="AuthTemplate">
       <div className="whiteBox">
         <div className="logo-area">
-          <Link href={"/"}>REACTERS</Link>
+          <Link href={"/"}>{"HyunJinNo's Blog"}</Link>
         </div>
         {children}
       </div>

@@ -25,6 +25,17 @@
         margin-top: 1rem;
       }
     }
+
+    Button {
+      margin-top: 1rem;
+      width: 100%;
+      height: 2.5rem;
+      background-color: nth($cyan, 6);
+
+      &:hover {
+        background-color: nth($cyan, 5);
+      }
+    }
   }
 
   footer {

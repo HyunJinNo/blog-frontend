@@ -1,16 +1,60 @@
-const SAMPLE_ACTION = "auth/SAMPLE_ACTION" as const;
+import { produce } from "immer";
 
-export const sampleAction = () => ({ type: SAMPLE_ACTION });
+const CHANGE_FIELD = "auth/CHANGE_FIELD" as const;
+const INITIALIZE_FORM = "auth/INITIALIZE_FORM" as const;
 
-type Actions = ReturnType<typeof sampleAction>;
+/**
+ * form의 상태를 변경하는 액션 함수
+ * @param form register or login
+ * @param key username, password, or passwordConfirm
+ * @param value 변경하는 값
+ * @returns
+ */
+export const changeField = (form: string, key: string, value: string) => {
+  return {
+    type: CHANGE_FIELD,
+    form: form,
+    key: key,
+    value: value,
+  };
+};
 
-const initialState = {};
+export const initializeForm = (form: string) => {
+  return {
+    type: INITIALIZE_FORM,
+    form: form,
+  };
+};
 
-const auth = (state = initialState, actions: Actions) => {
-  switch (actions.type) {
-    case SAMPLE_ACTION:
+type Actions =
+  | ReturnType<typeof changeField>
+  | ReturnType<typeof initializeForm>;
+
+const initialState = {
+  register: {
+    username: "",
+    password: "",
+    passwordConfirm: "",
+  },
+  login: {
+    username: "",
+    password: "",
+  },
+};
+
+const auth = (state = initialState, action: Actions) => {
+  switch (action.type) {
+    case CHANGE_FIELD:
+      return produce<any>(state, (draft) => {
+        draft[action.form][action.key] = action.value;
+      });
+    case INITIALIZE_FORM:
       return {
         ...state,
+        [action.form]:
+          action.form === "register"
+            ? initialState.register
+            : initialState.login,
       };
     default:
       return state;

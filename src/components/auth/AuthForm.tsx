@@ -1,31 +1,60 @@
 import "@/styles/AuthForm.scss";
 import Button from "../common/Button";
 import Link from "next/link";
+import authType from "@/constants/authMap";
+import { ChangeEvent, FormEvent } from "react";
+
+type MyProps = {
+  type: string;
+  form: { username: string; password: string; passwordConfirm?: string };
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+};
 
 /**
  * 회원가입 또는 로그인 폼
  */
-const AuthForm = () => {
+const AuthForm = ({ type, form, onChange, onSubmit }: MyProps) => {
+  const text = authType.get(type);
+
   return (
     <div className="AuthForm">
-      <h3>로그인</h3>
-      <form action="">
+      <h3>{text}</h3>
+      <form onSubmit={onSubmit}>
         <input
           type="text"
           autoComplete="username"
           name="username"
           placeholder="아이디"
+          onChange={onChange}
+          value={form.username}
         />
         <input
           type="password"
           autoComplete="new-password"
           name="password"
           placeholder="비밀번호"
+          onChange={onChange}
+          value={form.password}
         />
-        <Button>로그인</Button>
+        {type === "register" && (
+          <input
+            type="password"
+            autoComplete="new-password"
+            name="passwordConfirm"
+            placeholder="비밀번호 확인"
+            onChange={onChange}
+            value={form.passwordConfirm}
+          />
+        )}
+        <Button>{text}</Button>
       </form>
       <footer>
-        <Link href={"/register"}>회원가입</Link>
+        {type === "login" ? (
+          <Link href="/register">회원가입</Link>
+        ) : (
+          <Link href="/login">로그인</Link>
+        )}
       </footer>
     </div>
   );
