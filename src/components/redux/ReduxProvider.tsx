@@ -1,11 +1,18 @@
 "use client";
 
-import rootReducer from "@/modules";
+import rootReducer, { rootSaga } from "@/modules";
 import { composeWithDevTools } from "@redux-devtools/extension";
 import { Provider } from "react-redux";
-import { legacy_createStore as createStore } from "redux";
+import { applyMiddleware, legacy_createStore as createStore } from "redux";
+import createSagaMiddleware from "redux-saga";
 
-const store = createStore(rootReducer, undefined, composeWithDevTools());
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(
+  rootReducer,
+  undefined,
+  composeWithDevTools(applyMiddleware(sagaMiddleware)),
+);
+sagaMiddleware.run(rootSaga);
 
 export default function ReduxProvider({
   children,
