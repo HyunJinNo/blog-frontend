@@ -5,23 +5,28 @@ import { changeField, initializeForm, register } from "@/modules/auth";
 import { ChangeEvent, FormEvent, useEffect } from "react";
 import { connect } from "react-redux";
 import AuthForm from "../../components/auth/AuthForm";
+import { check } from "@/modules/user";
 
 type MyProps = {
   form: { username: string; password: string; passwordConfirm: string };
   auth: {} | null;
   authError: boolean | null;
+  user: { username: string; password: string } | null;
   changeField: (form: string, key: string, value: string) => void;
   initializeForm: (form: string) => void;
   register: (username: string, password: string) => void;
+  check: () => void;
 };
 
 const RegisterForm = ({
   form,
   auth,
   authError,
+  user,
   changeField,
   initializeForm,
   register,
+  check,
 }: MyProps) => {
   // input 변경 이벤트 handler
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -56,8 +61,17 @@ const RegisterForm = ({
     if (auth) {
       console.log("회원가입 성공");
       console.log(auth);
+      check();
     }
-  }, [auth, authError]);
+  }, [auth, authError, check]);
+
+  // user 값이 잘 설정되었는지 확인
+  useEffect(() => {
+    if (user) {
+      console.log("check API 성공");
+      console.log(user);
+    }
+  }, [user]);
 
   return (
     <AuthForm
@@ -70,14 +84,16 @@ const RegisterForm = ({
 };
 
 export default connect(
-  ({ auth }: RootType) => ({
+  ({ auth, user }: RootType) => ({
     form: auth.register,
     auth: auth.auth,
     authError: auth.authError,
+    user: user.user,
   }),
   {
     changeField,
     initializeForm,
     register,
+    check,
   },
 )(RegisterForm);

@@ -24,3 +24,8 @@ export const login = ({
     password: password,
   });
 };
+
+// 로그인 상태 확인
+export const check = () => {
+  return client.get("/api/auth/check");
+};
