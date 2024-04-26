@@ -2,7 +2,7 @@
 
 import { RootType } from "@/modules";
 import { changeField, initializeForm, login } from "@/modules/auth";
-import { ChangeEvent, FormEvent, useEffect } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import AuthForm from "../../components/auth/AuthForm";
 import { useRouter } from "next/navigation";
@@ -30,11 +30,13 @@ const LoginForm = ({
   check,
 }: MyProps) => {
   const router = useRouter();
+  const [error, setError] = useState<string | null>(null);
 
   // input 변경 이벤트 handler
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     changeField("login", name, value);
+    setError(null);
   };
 
   // form 등록 이벤트 handler
@@ -44,15 +46,14 @@ const LoginForm = ({
     login(username, password);
   };
 
-  // 컴포넌트가 처음 렌더링될 때 form을 초기화함.
+  // 컴포넌트가 처음 렌더링될 때 초기화함.
   useEffect(() => {
     initializeForm("login");
   }, [initializeForm]);
 
   useEffect(() => {
     if (authError) {
-      console.log("오류 발생");
-      console.log(authError);
+      setError("로그인 실패");
       return;
     }
     if (auth) {
@@ -73,6 +74,7 @@ const LoginForm = ({
       form={form}
       onChange={onChange}
       onSubmit={onSubmit}
+      error={error}
     />
   );
 };

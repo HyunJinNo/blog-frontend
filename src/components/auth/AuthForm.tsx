@@ -9,12 +9,13 @@ type MyProps = {
   form: { username: string; password: string; passwordConfirm?: string };
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  error: string | null;
 };
 
 /**
  * 회원가입 또는 로그인 폼
  */
-const AuthForm = ({ type, form, onChange, onSubmit }: MyProps) => {
+const AuthForm = ({ type, form, onChange, onSubmit, error }: MyProps) => {
   const text = authType.get(type);
 
   return (
@@ -47,6 +48,7 @@ const AuthForm = ({ type, form, onChange, onSubmit }: MyProps) => {
             value={form.passwordConfirm}
           />
         )}
+        {error && <div className="errorMessage">{error}</div>}
         <Button>{text}</Button>
       </form>
       <footer>

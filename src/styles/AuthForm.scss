@@ -36,6 +36,13 @@
         background-color: nth($cyan, 5);
       }
     }
+
+    .errorMessage {
+      margin-top: 1rem;
+      color: red;
+      text-align: center;
+      font-size: 0.875rem;
+    }
   }
 
   footer {
