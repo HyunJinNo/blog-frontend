@@ -114,20 +114,22 @@ const auth = (state = initialState, action: Action) => {
       });
     case REGISTER_SUCCESS:
       return produce(state, (draft: Draft<any>) => {
-        draft.authError = null;
         draft.auth = action.payload;
+        draft.authError = null;
       });
     case REGISTER_FAILURE:
       return produce(state, (draft: Draft<any>) => {
+        draft.auth = null;
         draft.authError = action.error;
       });
     case LOGIN_SUCCESS:
       return produce(state, (draft: Draft<any>) => {
+        draft.auth = action.payload;
         draft.authError = null;
-        draft.auth = action.payload.auth;
       });
     case LOGIN_FAILURE:
       return produce(state, (draft: Draft<any>) => {
+        draft.auth = null;
         draft.authError = action.error;
       });
     default:

@@ -6,12 +6,13 @@ import { ChangeEvent, FormEvent, useEffect } from "react";
 import { connect } from "react-redux";
 import AuthForm from "../../components/auth/AuthForm";
 import { check } from "@/modules/user";
+import { useRouter } from "next/navigation";
 
 type MyProps = {
   form: { username: string; password: string; passwordConfirm: string };
   auth: {} | null;
   authError: boolean | null;
-  user: { username: string; password: string } | null;
+  user: { id: number; username: string | null; checkError: boolean | null };
   changeField: (form: string, key: string, value: string) => void;
   initializeForm: (form: string) => void;
   register: (username: string, password: string) => void;
@@ -28,6 +29,8 @@ const RegisterForm = ({
   register,
   check,
 }: MyProps) => {
+  const router = useRouter();
+
   // input 변경 이벤트 handler
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -67,11 +70,10 @@ const RegisterForm = ({
 
   // user 값이 잘 설정되었는지 확인
   useEffect(() => {
-    if (user) {
-      console.log("check API 성공");
-      console.log(user);
+    if (user.username) {
+      router.push("/"); // 홈 화면으로 이동
     }
-  }, [user]);
+  }, [router, user.username]);
 
   return (
     <AuthForm
@@ -88,7 +90,7 @@ export default connect(
     form: auth.register,
     auth: auth.auth,
     authError: auth.authError,
-    user: user.user,
+    user: user,
   }),
   {
     changeField,

@@ -1,18 +1,36 @@
 "use client";
 
 import { RootType } from "@/modules";
-import { changeField, initializeForm } from "@/modules/auth";
+import { changeField, initializeForm, login } from "@/modules/auth";
 import { ChangeEvent, FormEvent, useEffect } from "react";
 import { connect } from "react-redux";
 import AuthForm from "../../components/auth/AuthForm";
+import { useRouter } from "next/navigation";
+import { check } from "@/modules/user";
 
 type MyProps = {
   form: { username: string; password: string };
+  auth: {} | null;
+  authError: boolean | null;
+  user: { id: number; username: string | null; checkError: boolean | null };
   changeField: (form: string, key: string, value: string) => void;
   initializeForm: (form: string) => void;
+  login: (username: string, password: string) => void;
+  check: () => void;
 };
 
-const LoginForm = ({ form, changeField, initializeForm }: MyProps) => {
+const LoginForm = ({
+  form,
+  auth,
+  authError,
+  user,
+  changeField,
+  initializeForm,
+  login,
+  check,
+}: MyProps) => {
+  const router = useRouter();
+
   // input 변경 이벤트 handler
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -22,13 +40,32 @@ const LoginForm = ({ form, changeField, initializeForm }: MyProps) => {
   // form 등록 이벤트 handler
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: 구현 예정
+    const { username, password } = form;
+    login(username, password);
   };
 
   // 컴포넌트가 처음 렌더링될 때 form을 초기화함.
   useEffect(() => {
     initializeForm("login");
   }, [initializeForm]);
+
+  useEffect(() => {
+    if (authError) {
+      console.log("오류 발생");
+      console.log(authError);
+      return;
+    }
+    if (auth) {
+      console.log("로그인 성공");
+      check();
+    }
+  }, [auth, authError, check]);
+
+  useEffect(() => {
+    if (user.username) {
+      router.push("/");
+    }
+  }, [router, user.username]);
 
   return (
     <AuthForm
@@ -41,11 +78,16 @@ const LoginForm = ({ form, changeField, initializeForm }: MyProps) => {
 };
 
 export default connect(
-  ({ auth }: RootType) => ({
+  ({ auth, user }: RootType) => ({
     form: auth.login,
+    auth: auth.auth,
+    authError: auth.authError,
+    user: user,
   }),
   {
     changeField,
     initializeForm,
+    login,
+    check,
   },
 )(LoginForm);
