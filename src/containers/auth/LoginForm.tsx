@@ -44,6 +44,13 @@ const LoginForm = ({
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { username, password } = form;
+
+    // 하나라도 비어있는 경우
+    if (username === "" || password === "") {
+      setError("빈 칸을 모두 입력하세요.");
+      return;
+    }
+
     login(username, password);
   };
 

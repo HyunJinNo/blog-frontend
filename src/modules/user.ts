@@ -1,6 +1,6 @@
 import createRequestSaga from "@/lib/createRequestSaga";
 import * as authAPI from "@/lib/api/auth";
-import { takeLatest } from "redux-saga/effects";
+import { call, takeLatest } from "redux-saga/effects";
 import { Draft, produce } from "immer";
 import { AxiosError } from "axios";
 
@@ -11,6 +11,9 @@ const TEMP_SET_USER = "user/TEMP_SET_USER" as const;
 const CHECK = "user/CHECK" as const;
 const CHECK_SUCCESS = "user/CHECK_SUCCESS" as const;
 const CHECK_FAILURE = "user/CHECK_FAILURE" as const;
+
+// 로그아웃 처리
+const LOGOUT = "user/LOGOUT" as const;
 
 export const tempSetUser = (id: number, username: string) => {
   return {
@@ -28,6 +31,12 @@ export const check = () => {
   };
 };
 
+export const logout = () => {
+  return {
+    type: LOGOUT,
+  };
+};
+
 type Action = {
   type: string;
   payload: {
@@ -38,8 +47,27 @@ type Action = {
 };
 
 const checkSaga = createRequestSaga(CHECK, authAPI.check);
+const checkFailureSaga = () => {
+  try {
+    localStorage.removeItem("user"); // localStorage에서 user를 제거
+  } catch (e) {
+    console.log("localStorage is not working");
+  }
+};
+
+function* logoutSaga() {
+  try {
+    yield call(authAPI.logout); // logout API 호출
+    localStorage.removeItem("user"); // localStorage에서 user를 제거
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 export function* userSaga() {
   yield takeLatest(CHECK, checkSaga);
+  yield takeLatest(CHECK_FAILURE, checkFailureSaga);
+  yield takeLatest(LOGOUT, logoutSaga);
 }
 
 const initialState = {
@@ -66,6 +94,12 @@ export const user = (state = initialState, action: Action) => {
         draft.id = -1;
         draft.username = null;
         draft.checkError = action.error;
+      });
+    case LOGOUT:
+      return produce(state, (draft: Draft<any>) => {
+        draft.id = -1;
+        draft.username = null;
+        draft.checkError = null;
       });
     default:
       return state;

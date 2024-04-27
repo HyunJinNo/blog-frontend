@@ -1,6 +1,7 @@
 import "@/styles/Header.scss";
 import { AxiosError } from "axios";
 import Link from "next/link";
+import Button from "./Button";
 
 type MyProps = {
   user: {
@@ -8,9 +9,10 @@ type MyProps = {
     username: string | null;
     checkError: AxiosError | null;
   };
+  onLogout: () => void;
 };
 
-const Header = ({ user }: MyProps) => {
+const Header = ({ user, onLogout }: MyProps) => {
   return (
     <div className="Header">
       <div className="content">
@@ -20,9 +22,7 @@ const Header = ({ user }: MyProps) => {
         {user.username ? (
           <div className="right">
             <div className="username">{user.username}</div>
-            <Link className="button" href="/">
-              로그아웃
-            </Link>
+            <Button onClick={onLogout}>로그아웃</Button>
           </div>
         ) : (
           <Link className="button" href="/login">

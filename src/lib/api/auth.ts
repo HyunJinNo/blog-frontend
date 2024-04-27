@@ -29,3 +29,8 @@ export const login = ({
 export const check = () => {
   return client.get("/api/auth/check");
 };
+
+// 로그아웃
+export const logout = () => {
+  return client.post("/api/auth/logout");
+};
