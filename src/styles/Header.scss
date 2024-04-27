@@ -1,0 +1,55 @@
+@import "./utils.scss";
+
+.Header {
+  .content {
+    position: fixed;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 16px;
+    padding-right: 16px;
+
+    .logo {
+      font-size: 1.125rem;
+      font-weight: 800;
+      color: black;
+      letter-spacing: 2px;
+    }
+
+    .right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .username {
+        font-weight: 800;
+        margin-right: 1rem;
+      }
+    }
+
+    .button {
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-weight: bold;
+      padding: 0.25rem 1rem;
+      color: white;
+      outline: none;
+      cursor: pointer;
+
+      background-color: nth($gray, 9);
+      &:hover {
+        background-color: nth($gray, 7);
+      }
+    }
+  }
+
+  // 헤더가 fixed로 되어 있기 때문에 페이지의 콘텐츠가 4rem 아래에 나타나도록 해준다.
+  .spacer {
+    height: 4rem;
+  }
+}

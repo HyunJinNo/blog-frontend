@@ -1,7 +1,7 @@
 import "@/styles/Button.scss";
 
 type MyProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 const Button = ({ children }: MyProps) => {

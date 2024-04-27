@@ -1,5 +1,10 @@
-import PostList from "@/components/common/PostList";
+import HeaderContainer from "@/containers/common/HeaderContainer";
 
 export default function Home() {
-  return <PostList />;
+  return (
+    <div>
+      <HeaderContainer />
+      <div>안녕하세요.</div>
+    </div>
+  );
 }

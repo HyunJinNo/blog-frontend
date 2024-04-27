@@ -4,7 +4,8 @@ import { takeLatest } from "redux-saga/effects";
 import { Draft, produce } from "immer";
 import { AxiosError } from "axios";
 
-const TEMP_SET_USER = "user/TEMP_SET_USER" as const; // 새로고침 이후 임시 로그인 처리
+// 새로고침 이후 임시 로그인 처리
+const TEMP_SET_USER = "user/TEMP_SET_USER" as const;
 
 // 회원 정보 확인
 const CHECK = "user/CHECK" as const;

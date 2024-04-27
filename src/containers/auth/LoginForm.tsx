@@ -13,7 +13,7 @@ type MyProps = {
   form: { username: string; password: string };
   auth: {} | null;
   authError: AxiosError | null;
-  user: { id: number; username: string | null; checkError: boolean | null };
+  user: { id: number; username: string | null; checkError: AxiosError | null };
   changeField: (form: string, key: string, value: string) => void;
   initializeForm: (form: string) => void;
   login: (username: string, password: string) => void;
@@ -69,8 +69,13 @@ const LoginForm = ({
   useEffect(() => {
     if (user.username) {
       router.push("/");
+      try {
+        localStorage.setItem("user", JSON.stringify(user));
+      } catch (e) {
+        console.log("localStorage is not working");
+      }
     }
-  }, [router, user.username]);
+  }, [router, user, user.username]);
 
   return (
     <AuthForm
