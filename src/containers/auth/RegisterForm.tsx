@@ -7,11 +7,12 @@ import { connect } from "react-redux";
 import AuthForm from "../../components/auth/AuthForm";
 import { check } from "@/modules/user";
 import { useRouter } from "next/navigation";
+import { AxiosError } from "axios";
 
 type MyProps = {
   form: { username: string; password: string; passwordConfirm: string };
   auth: {} | null;
-  authError: boolean | null;
+  authError: AxiosError | null;
   user: { id: number; username: string | null; checkError: boolean | null };
   changeField: (form: string, key: string, value: string) => void;
   initializeForm: (form: string) => void;
@@ -70,9 +71,19 @@ const RegisterForm = ({
   // 회원가입 성공/실패 처리
   useEffect(() => {
     if (authError) {
+      // 이미 계정이 존재하는 경우
+      if (authError.response!.status === 409) {
+        setError("이미 존재하는 계정명입니다.");
+        return;
+      }
+
+      // 기타 이유
       setError("회원가입 실패");
       return;
+    } else {
+      setError(null);
     }
+
     if (auth) {
       console.log("회원가입 성공");
       console.log(auth);

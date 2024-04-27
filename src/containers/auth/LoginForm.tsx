@@ -7,11 +7,12 @@ import { connect } from "react-redux";
 import AuthForm from "../../components/auth/AuthForm";
 import { useRouter } from "next/navigation";
 import { check } from "@/modules/user";
+import { AxiosError } from "axios";
 
 type MyProps = {
   form: { username: string; password: string };
   auth: {} | null;
-  authError: boolean | null;
+  authError: AxiosError | null;
   user: { id: number; username: string | null; checkError: boolean | null };
   changeField: (form: string, key: string, value: string) => void;
   initializeForm: (form: string) => void;
@@ -55,7 +56,10 @@ const LoginForm = ({
     if (authError) {
       setError("로그인 실패");
       return;
+    } else {
+      setError(null);
     }
+
     if (auth) {
       console.log("로그인 성공");
       check();

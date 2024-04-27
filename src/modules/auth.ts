@@ -2,6 +2,7 @@ import createRequestSaga from "@/lib/createRequestSaga";
 import { Draft, produce } from "immer";
 import * as authApi from "@/lib/api/auth";
 import { takeLatest } from "redux-saga/effects";
+import { AxiosError } from "axios";
 
 const CHANGE_FIELD = "auth/CHANGE_FIELD" as const;
 const INITIALIZE_FORM = "auth/INITIALIZE_FORM" as const;
@@ -81,7 +82,7 @@ type Action = {
     password: string;
     auth: {};
   };
-  error: boolean;
+  error: AxiosError;
 };
 
 const initialState = {
