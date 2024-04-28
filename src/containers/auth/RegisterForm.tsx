@@ -13,7 +13,7 @@ type MyProps = {
   form: { username: string; password: string; passwordConfirm: string };
   auth: {} | null;
   authError: AxiosError | null;
-  user: { id: number; username: string | null; checkError: AxiosError | null };
+  user: { id: number; username: string | null; userError: AxiosError | null };
   changeField: (form: string, key: string, value: string) => void;
   initializeForm: (form: string) => void;
   register: (username: string, password: string) => void;

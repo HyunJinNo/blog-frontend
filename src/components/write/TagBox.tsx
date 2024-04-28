@@ -1,9 +1,20 @@
 "use client";
 
 import "@/styles/TagBox.scss";
-import React, { ChangeEvent, FormEvent, useCallback, useState } from "react";
+import React, {
+  ChangeEvent,
+  FormEvent,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 
-const TagBox = () => {
+type MyProps = {
+  tags: string[];
+  onChangeTags: (nextTags: string[]) => void;
+};
+
+const TagBox = ({ tags, onChangeTags }: MyProps) => {
   const [input, setInput] = useState<string>("");
   const [localTags, setLocalTags] = useState<string[]>([]);
 
@@ -14,17 +25,21 @@ const TagBox = () => {
       } else if (localTags.includes(tag)) {
         return; // 이미 존재하는 경우 추가하지 않음.
       } else {
-        setLocalTags([...localTags, tag]);
+        const nextTags = [...localTags, tag];
+        setLocalTags(nextTags);
+        onChangeTags(nextTags);
       }
     },
-    [localTags],
+    [localTags, onChangeTags],
   );
 
   const onRemove = useCallback(
     (tag: string) => {
-      setLocalTags(localTags.filter((value) => value !== tag));
+      const nextTags = localTags.filter((value) => value !== tag);
+      setLocalTags(nextTags);
+      onChangeTags(nextTags);
     },
-    [localTags],
+    [localTags, onChangeTags],
   );
 
   const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -40,6 +55,11 @@ const TagBox = () => {
     [input, insertTag],
   );
 
+  // tags 값이 변경되는 경우
+  useEffect(() => {
+    setLocalTags(tags);
+  }, [tags]);
+
   // React.memo를 사용하여 tag 값이 바뀔 때만 리렌더링되도록 처리
   const TagItem = React.memo(
     ({ tag, onRemove }: { tag: string; onRemove: (tag: string) => void }) => (
@@ -50,7 +70,7 @@ const TagBox = () => {
   );
   TagItem.displayName = "TagItem";
 
-  // React.memo를 사용하여 tags 값이 바뀔 때문 리렌더링되도록 처리
+  // React.memo를 사용하여 tags 값이 바뀔 때만 리렌더링되도록 처리
   const TagList = React.memo(
     ({
       tags,

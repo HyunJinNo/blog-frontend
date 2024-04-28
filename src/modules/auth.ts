@@ -3,6 +3,7 @@ import { Draft, produce } from "immer";
 import * as authApi from "@/lib/api/auth";
 import { takeLatest } from "redux-saga/effects";
 import { AxiosError } from "axios";
+import { AuthAction, AuthState } from "@/constants/types";
 
 const CHANGE_FIELD = "auth/CHANGE_FIELD" as const;
 const INITIALIZE_FORM = "auth/INITIALIZE_FORM" as const;
@@ -72,20 +73,7 @@ export function* authSaga() {
   yield takeLatest(LOGIN, loginSaga);
 }
 
-type Action = {
-  type: string;
-  payload: {
-    form: string;
-    key: string;
-    value: string;
-    username: string;
-    password: string;
-    auth: {};
-  };
-  error: AxiosError;
-};
-
-const initialState = {
+const initialState: AuthState = {
   register: {
     username: "",
     password: "",
@@ -99,7 +87,7 @@ const initialState = {
   authError: null,
 };
 
-const auth = (state = initialState, action: Action) => {
+const auth = (state = initialState, action: AuthAction) => {
   switch (action.type) {
     case CHANGE_FIELD:
       return produce(state, (draft: Draft<any>) => {

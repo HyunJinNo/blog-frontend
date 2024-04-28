@@ -7,7 +7,7 @@ import { AxiosError } from "axios";
 import { connect } from "react-redux";
 
 type MyProps = {
-  user: { id: number; username: string | null; checkError: AxiosError | null };
+  user: { id: number; username: string | null; userError: AxiosError | null };
   logout: () => void;
 };
 

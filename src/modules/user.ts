@@ -3,6 +3,7 @@ import * as authAPI from "@/lib/api/auth";
 import { call, takeLatest } from "redux-saga/effects";
 import { Draft, produce } from "immer";
 import { AxiosError } from "axios";
+import { UserAction, UserState } from "@/constants/types";
 
 // 새로고침 이후 임시 로그인 처리
 const TEMP_SET_USER = "user/TEMP_SET_USER" as const;
@@ -37,15 +38,6 @@ export const logout = () => {
   };
 };
 
-type Action = {
-  type: string;
-  payload: {
-    id: number;
-    username: string;
-  };
-  error: AxiosError;
-};
-
 const checkSaga = createRequestSaga(CHECK, authAPI.check);
 const checkFailureSaga = () => {
   try {
@@ -70,13 +62,13 @@ export function* userSaga() {
   yield takeLatest(LOGOUT, logoutSaga);
 }
 
-const initialState = {
+const initialState: UserState = {
   id: -1,
   username: null,
-  checkError: null,
+  userError: null,
 };
 
-export const user = (state = initialState, action: Action) => {
+export const user = (state = initialState, action: UserAction) => {
   switch (action.type) {
     case TEMP_SET_USER:
       return produce(state, (draft: Draft<any>) => {

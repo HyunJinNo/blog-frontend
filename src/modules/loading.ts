@@ -1,3 +1,5 @@
+import { LoadingAction } from "@/constants/types";
+
 const START_LOADING = "loading/START_LOADING" as const;
 const FINISH_LOADING = "loading/FINISH_LOADING" as const;
 
@@ -17,14 +19,9 @@ export const finishLoading = (requestType: string) => {
   };
 };
 
-type Action = {
-  type: string;
-  payload: string;
-};
-
 const initialState = {};
 
-const loading = (state = initialState, action: Action) => {
+const loading = (state = initialState, action: LoadingAction) => {
   switch (action.type) {
     case START_LOADING:
       return {

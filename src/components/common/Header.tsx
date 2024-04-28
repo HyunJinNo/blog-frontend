@@ -7,7 +7,7 @@ type MyProps = {
   user: {
     id: number;
     username: string | null;
-    checkError: AxiosError | null;
+    userError: AxiosError | null;
   };
   onLogout: () => void;
 };

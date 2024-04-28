@@ -49,11 +49,15 @@
   .tagList {
     display: flex;
     margin-top: 0.5rem;
+    align-items: center;
 
     .tag {
       margin-right: 0.5rem;
+      background-color: nth($gray, 3);
       color: nth($gray, 7);
       cursor: pointer;
+      border-radius: 4px;
+      padding: 4px;
 
       &:hover {
         opacity: 0.5;
