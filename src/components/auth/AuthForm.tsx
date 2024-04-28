@@ -1,5 +1,5 @@
 import "@/styles/AuthForm.scss";
-import Button from "../common/Button";
+import Button from "@/components/common/Button";
 import Link from "next/link";
 import authType from "@/constants/authMap";
 import { ChangeEvent, FormEvent } from "react";

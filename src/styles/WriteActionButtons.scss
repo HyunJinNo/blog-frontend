@@ -1,0 +1,27 @@
+@import "./utils.scss";
+
+.WriteActionButtons {
+  margin-top: 0.5rem;
+  margin-bottom: 3rem;
+
+  Button {
+    background-color: nth($cyan, 6);
+    height: 2.125rem;
+
+    & + Button {
+      margin-left: 0.5rem;
+    }
+
+    &:hover {
+      background-color: nth($cyan, 5);
+    }
+  }
+
+  Button + Button {
+    background-color: nth($gray, 9);
+
+    &:hover {
+      background-color: nth($gray, 7);
+    }
+  }
+}
