@@ -1,3 +1,12 @@
+import Responsive from "@/components/common/Responsive";
+import Editor from "@/components/write/Editor";
+import TagBox from "@/components/write/TagBox";
+
 export default function WritePage() {
-  return <div>글쓰기</div>;
+  return (
+    <Responsive>
+      <Editor />
+      <TagBox />
+    </Responsive>
+  );
 }

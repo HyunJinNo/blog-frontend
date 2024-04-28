@@ -1,0 +1,63 @@
+@import "./utils.scss";
+
+.TagBox {
+  width: 100%;
+  border-top: 1px solid nth($gray, 3);
+  padding-top: 2rem;
+
+  h4 {
+    color: nth($gray, 9);
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .tagForm {
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    width: 256px;
+    border: 1px solid nth($gray, 10); // 스타일 초기화
+
+    input,
+    button {
+      outline: none;
+      border: none;
+      font-size: 1rem;
+    }
+
+    input {
+      padding: 0.5rem;
+      flex: 1;
+      min-width: 0;
+    }
+
+    button {
+      cursor: pointer;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      border: none;
+      background-color: nth($gray, 9);
+      color: white;
+      font-weight: bold;
+
+      &:hover {
+        background-color: nth($gray, 7);
+      }
+    }
+  }
+
+  .tagList {
+    display: flex;
+    margin-top: 0.5rem;
+
+    .tag {
+      margin-right: 0.5rem;
+      color: nth($gray, 7);
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+  }
+}
