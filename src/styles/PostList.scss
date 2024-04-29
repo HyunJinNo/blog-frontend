@@ -1,0 +1,28 @@
+@import "./utils.scss";
+
+.PostList {
+  margin-top: 3rem;
+  margin-left: 1rem;
+
+  .postListHead {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 3rem;
+
+    .button {
+      margin-right: 1rem;
+      padding: 0.25rem 1rem;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: white;
+      outline: none;
+      background-color: nth($cyan, 6);
+
+      &:hover {
+        background-color: nth($cyan, 5);
+      }
+    }
+  }
+}

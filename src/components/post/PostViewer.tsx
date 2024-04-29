@@ -1,6 +1,8 @@
 import "@/styles/PostViewer.scss";
 import { readPost } from "@/lib/api/posts";
 import { Post } from "@/constants/api/types";
+import SubInfo from "../common/SubInfo";
+import Tags from "../common/Tags";
 
 type MyProps = {
   id: number;
@@ -18,19 +20,8 @@ const PostViewer = async ({ id }: MyProps) => {
     <div className="PostViewer">
       <div className="postHead">
         <h1>{post.title}</h1>
-        <div className="subInfo">
-          <span>
-            <b>{post.user_id}</b>
-          </span>
-          <span>{new Date().toLocaleDateString()}</span>
-        </div>
-        <div className="tags">
-          {post.tags.map((tag, index) => (
-            <div className="tag" key={index}>
-              {tag}
-            </div>
-          ))}
-        </div>
+        <SubInfo user_id={post.user_id} />
+        <Tags tags={post.tags} />
       </div>
       <div
         className="postContent"

@@ -1,4 +1,4 @@
-import PostList from "@/components/common/PostList";
+import PostList from "@/components/post/PostList";
 
 type MyProps = {
   params: { username: string };

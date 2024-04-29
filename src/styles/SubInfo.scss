@@ -1,0 +1,14 @@
+@import "./utils.scss";
+
+.SubInfo {
+  margin-left: 0.2rem;
+  color: nth($gray, 7);
+
+  // span 사이에 가운뎃점 문자 보여주기
+  span + span:before {
+    color: nth($gray, 5);
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    content: "\B7"; // 가운뎃점 문자
+  }
+}
