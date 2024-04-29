@@ -1,10 +1,15 @@
 /** @type {import('next').NextConfig} */
+
+import dotenv from "dotenv";
+
+dotenv.config();
+
 const nextConfig = {
   async rewrites() {
     return [
       {
-        source: "/:path*",
-        destination: "http://localhost:4000/:path*",
+        source: process.env.API_SOURCE,
+        destination: process.env.API_DESTINATION,
       },
     ];
   },
