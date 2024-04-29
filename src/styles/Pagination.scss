@@ -1,0 +1,35 @@
+@import "./utils.scss";
+
+.Pagination {
+  width: 640px;
+  margin: auto;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-bottom: 2rem;
+
+  .buttonGroup {
+    display: flex;
+
+    .button,
+    .button.disabled {
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-weight: bold;
+      padding: 0.25rem 1rem;
+      margin: 0.1rem;
+      color: white;
+      outline: none;
+
+      background-color: nth($gray, 7);
+      &:hover {
+        background-color: nth($gray, 7);
+      }
+    }
+
+    .button {
+      background-color: nth($gray, 9);
+    }
+  }
+}

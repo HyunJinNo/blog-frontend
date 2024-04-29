@@ -2,6 +2,7 @@ import "@/styles/PostList.scss";
 import PostItem from "./PostItem";
 import Link from "next/link";
 import { getPostList } from "@/lib/api/posts";
+import Pagination from "./Pagination";
 
 type MyProps = {
   page: number;
@@ -9,11 +10,13 @@ type MyProps = {
 
 const getPosts = async (page: number) => {
   const response = await getPostList(page);
-  return response.data;
+  return response;
 };
 
 const PostList = async ({ page }: MyProps) => {
-  const posts = await getPosts(page);
+  const response = await getPosts(page);
+  const posts = response.data;
+  const lastPage: number = Number(response.headers["lastpage"]);
 
   return (
     <div className="PostList">
@@ -27,6 +30,7 @@ const PostList = async ({ page }: MyProps) => {
           <PostItem key={post.id} post={post} />
         ))}
       </div>
+      <Pagination page={page} lastPage={lastPage} />
     </div>
   );
 };
