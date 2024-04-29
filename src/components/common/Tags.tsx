@@ -9,7 +9,7 @@ const Tags = ({ tags }: MyProps) => {
     <div className="Tags">
       {tags.map((tag, index) => (
         <div className="tag" key={index}>
-          {tag}
+          #{tag}
         </div>
       ))}
     </div>
