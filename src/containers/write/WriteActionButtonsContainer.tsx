@@ -30,8 +30,8 @@ const WriteActionButtonsContainer = ({ write, writePost }: MyProps) => {
   // 성공 또는 실패 시 수행할 작업
   useEffect(() => {
     if (post) {
-      const { user_id, id } = post;
-      router.push(`/${user_id}/${id}`);
+      const { id } = post;
+      router.push(`/posts/${id}`);
     }
     if (postError) {
       console.log(postError);

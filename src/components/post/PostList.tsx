@@ -1,12 +1,20 @@
 import "@/styles/PostList.scss";
 import PostItem from "./PostItem";
 import Link from "next/link";
+import { getPostList } from "@/lib/api/posts";
 
 type MyProps = {
-  username?: string;
+  page: number;
 };
 
-const PostList = ({ username }: MyProps) => {
+const getPosts = async (page: number) => {
+  const response = await getPostList(page);
+  return response.data;
+};
+
+const PostList = async ({ page }: MyProps) => {
+  const posts = await getPosts(page);
+
   return (
     <div className="PostList">
       <div className="postListHead">
@@ -15,9 +23,9 @@ const PostList = ({ username }: MyProps) => {
         </Link>
       </div>
       <div>
-        <PostItem />
-        <PostItem />
-        <PostItem />
+        {posts.map((post) => (
+          <PostItem key={post.id} post={post} />
+        ))}
       </div>
     </div>
   );

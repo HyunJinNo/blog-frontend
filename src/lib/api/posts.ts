@@ -17,6 +17,13 @@ export const writePost = ({
   });
 };
 
+// 포스트 목록 조회
+export const getPostList = (page: number) => {
+  return client.get<Post[]>(`${process.env.API_BASE_URL}/api/posts`, {
+    params: { page: page },
+  });
+};
+
 // 특정 포스트 조회
 export const readPost = (id: number) => {
   return client.get<Post>(`${process.env.API_BASE_URL}/api/posts/${id}`);
