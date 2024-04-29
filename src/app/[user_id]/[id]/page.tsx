@@ -1,7 +1,9 @@
+import PostViewer from "@/components/post/PostViewer";
+
 type MyProps = {
-  params: { postId: string };
+  params: { id: string };
 };
 
-export default function PostPage({ params: { postId } }: MyProps) {
-  return <div>포스트 읽기 {postId}</div>;
+export default function PostPage({ params: { id } }: MyProps) {
+  return <PostViewer id={Number(id)} />;
 }

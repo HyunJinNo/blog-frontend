@@ -1,7 +1,7 @@
 "use client";
 
 import WriteActionButtons from "@/components/write/WriteActionButtons";
-import { WriteState } from "@/constants/types";
+import { WriteState } from "@/constants/redux/types";
 import { RootType } from "@/modules";
 import { writePost } from "@/modules/write";
 import { useRouter } from "next/navigation";

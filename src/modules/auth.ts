@@ -2,8 +2,7 @@ import createRequestSaga from "@/lib/createRequestSaga";
 import { Draft, produce } from "immer";
 import * as authApi from "@/lib/api/auth";
 import { takeLatest } from "redux-saga/effects";
-import { AxiosError } from "axios";
-import { AuthAction, AuthState } from "@/constants/types";
+import { AuthAction, AuthState } from "@/constants/redux/types";
 
 const CHANGE_FIELD = "auth/CHANGE_FIELD" as const;
 const INITIALIZE_FORM = "auth/INITIALIZE_FORM" as const;

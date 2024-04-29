@@ -1,0 +1,51 @@
+@import "./utils.scss";
+
+.PostViewer {
+  margin-left: 1rem;
+  margin-top: 4rem;
+
+  .postHead {
+    border-bottom: 1px solid nth($gray, 3);
+    padding-bottom: 3rem;
+    margin-bottom: 3rem;
+
+    h1 {
+      font-size: 3rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .subInfo {
+      margin-top: 1rem;
+      color: nth($gray, 7);
+
+      // span 사이에 가웃뎃점 문자 보여주기
+      span + span::before {
+        color: nth($gray, 6);
+        padding-left: 0.25rem;
+        padding-right: 0.25rem;
+        content: "\B7"; // 가운뎃점 문자
+      }
+    }
+
+    .tags {
+      margin-top: 0.5rem;
+
+      .tag {
+        display: inline-block;
+        color: nth($cyan, 8);
+        text-decoration: none;
+        margin-right: 1rem;
+
+        &:hover {
+          color: nth($cyan, 7);
+        }
+      }
+    }
+  }
+
+  .postContent {
+    font-size: 1.3125rem;
+    color: nth($gray, 9);
+  }
+}

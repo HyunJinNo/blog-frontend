@@ -1,4 +1,4 @@
-import { LoadingAction } from "@/constants/types";
+import { LoadingAction } from "@/constants/redux/types";
 
 const START_LOADING = "loading/START_LOADING" as const;
 const FINISH_LOADING = "loading/FINISH_LOADING" as const;
