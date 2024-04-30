@@ -13,10 +13,9 @@
     border-top: 1px solid nth($gray, 3);
   }
 
-  h2 {
+  .title {
     font-size: 2rem;
-    margin-bottom: 0.5rem;
-    margin-top: 0;
+    font-weight: bold;
 
     &:hover {
       color: nth($gray, 7);

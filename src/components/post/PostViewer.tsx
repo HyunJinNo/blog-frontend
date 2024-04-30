@@ -8,10 +8,20 @@ type MyProps = {
   title: string;
   body: string;
   tags: string[];
-  user_id?: number;
+  user_id?: number; // 포스트를 작성한 아이디
+  userId: number; // 현재 로그인한 아이디
+  onRemove: () => void;
 };
 
-const PostViewer = ({ id, title, body, tags, user_id }: MyProps) => {
+const PostViewer = ({
+  id,
+  title,
+  body,
+  tags,
+  user_id,
+  userId,
+  onRemove,
+}: MyProps) => {
   return (
     <div className="PostViewer">
       <div className="postHead">
@@ -19,7 +29,7 @@ const PostViewer = ({ id, title, body, tags, user_id }: MyProps) => {
         <SubInfo user_id={user_id!} />
         <Tags tags={tags} />
       </div>
-      <PostActionButtons id={id!} />
+      {user_id === userId && <PostActionButtons id={id!} onRemove={onRemove} />}
       <div className="postContent" dangerouslySetInnerHTML={{ __html: body }} />
     </div>
   );

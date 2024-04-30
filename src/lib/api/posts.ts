@@ -30,7 +30,7 @@ export const readPost = ({ id }: Readonly<{ id: number }>) => {
 };
 
 // 특정 포스트 삭제
-export const deletePost = (id: number) => {
+export const removePost = (id: number) => {
   return client.delete(`/api/posts/${id}`);
 };
 

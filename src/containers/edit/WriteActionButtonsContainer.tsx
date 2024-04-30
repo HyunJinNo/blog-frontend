@@ -49,7 +49,13 @@ const WriteActionButtonsContainer = ({
     }
   }, [initialize, isUpdated, postError, postId, router]);
 
-  return <WriteActionButtons onPublish={onPublish} onCancel={onCancel} />;
+  return (
+    <WriteActionButtons
+      onPublish={onPublish}
+      onCancel={onCancel}
+      isEdit={true}
+    />
+  );
 };
 
 export default connect(
