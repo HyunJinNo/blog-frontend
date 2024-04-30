@@ -1,4 +1,5 @@
 import { AxiosError } from "axios";
+import { Post } from "../api/types";
 
 export type AuthAction = {
   type: string;
@@ -70,4 +71,14 @@ export type WriteState = {
     user_id: number;
   } | null;
   postError: AxiosError | null;
+  isUpdated: boolean;
+};
+
+export type PostAction = {
+  type: string;
+  post: Post;
+};
+
+export type PostState = {
+  post: Post | null;
 };

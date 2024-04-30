@@ -1,0 +1,29 @@
+@import "./utils.scss";
+
+.PostActionButtons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -1.5rem;
+  margin-bottom: 2rem;
+
+  .actionButton {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    background-color: nth($gray, 4);
+    color: nth($gray, 7);
+    font-weight: bold;
+    border: none;
+    outline: none;
+    font-size: 0.875rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: nth($gray, 2);
+      color: nth($cyan, 8);
+    }
+
+    & + .actionButton {
+      margin-left: 0.25rem;
+    }
+  }
+}

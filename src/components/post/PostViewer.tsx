@@ -1,8 +1,8 @@
 import "@/styles/PostViewer.scss";
 import { readPost } from "@/lib/api/posts";
-import { Post } from "@/constants/api/types";
 import SubInfo from "../common/SubInfo";
 import Tags from "../common/Tags";
+import PostActionButtons from "./PostActionButtons";
 
 type MyProps = {
   id: number;
@@ -14,7 +14,7 @@ const getPost = async (id: number) => {
 };
 
 const PostViewer = async ({ id }: MyProps) => {
-  const post: Post = await getPost(id);
+  const post = await getPost(id);
 
   return (
     <div className="PostViewer">
@@ -23,6 +23,7 @@ const PostViewer = async ({ id }: MyProps) => {
         <SubInfo user_id={post.user_id} />
         <Tags tags={post.tags} />
       </div>
+      <PostActionButtons id={post.id} />
       <div
         className="postContent"
         dangerouslySetInnerHTML={{ __html: post.body }}
