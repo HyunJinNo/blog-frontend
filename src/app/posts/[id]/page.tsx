@@ -1,9 +1,5 @@
-import PostViewer from "@/components/post/PostViewer";
+import PostViewerContainer from "@/containers/post/PostViewerContainer";
 
-type MyProps = {
-  params: { id: string };
-};
-
-export default function PostPage({ params: { id } }: MyProps) {
-  return <PostViewer id={Number(id)} />;
+export default function PostPage() {
+  return <PostViewerContainer />;
 }

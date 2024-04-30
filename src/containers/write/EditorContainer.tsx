@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 type MyProps = {
   title: string;
   body: string;
-  changeField: (key: string, value: string) => void;
+  changeField: (key: string, value: string) => ReturnType<typeof changeField>;
 };
 
 const EditorContainer = ({

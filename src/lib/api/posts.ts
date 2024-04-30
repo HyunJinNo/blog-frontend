@@ -24,13 +24,8 @@ export const getPostList = (page: number) => {
   });
 };
 
-// 특정 포스트 조회 (Server Side)
-export const readPost = (id: number) => {
-  return client.get<Post>(`${process.env.API_BASE_URL}/api/posts/${id}`);
-};
-
-// 특정 포스트 조회 (Client Side)
-export const readPostFromClient = ({ id }: Readonly<{ id: number }>) => {
+// 특정 포스트 조회
+export const readPost = ({ id }: Readonly<{ id: number }>) => {
   return client.get<Post>(`/api/posts/${id}`);
 };
 
@@ -40,17 +35,7 @@ export const deletePost = (id: number) => {
 };
 
 // 특정 포스트 수정
-export const updatePost = ({
-  id,
-  title,
-  body,
-  tags,
-}: Readonly<{
-  id: number;
-  title?: string;
-  body?: string;
-  tags?: string[];
-}>) => {
+export const updatePost = ({ id, title, body, tags }: Post) => {
   return client.patch(`/api/posts/${id}`, {
     title: title,
     body: body,

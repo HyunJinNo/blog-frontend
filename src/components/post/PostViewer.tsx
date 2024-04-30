@@ -1,33 +1,26 @@
 import "@/styles/PostViewer.scss";
-import { readPost } from "@/lib/api/posts";
 import SubInfo from "../common/SubInfo";
 import Tags from "../common/Tags";
 import PostActionButtons from "./PostActionButtons";
 
 type MyProps = {
-  id: number;
+  id?: number;
+  title: string;
+  body: string;
+  tags: string[];
+  user_id?: number;
 };
 
-const getPost = async (id: number) => {
-  const response = await readPost(id);
-  return response.data;
-};
-
-const PostViewer = async ({ id }: MyProps) => {
-  const post = await getPost(id);
-
+const PostViewer = ({ id, title, body, tags, user_id }: MyProps) => {
   return (
     <div className="PostViewer">
       <div className="postHead">
-        <h1>{post.title}</h1>
-        <SubInfo user_id={post.user_id} />
-        <Tags tags={post.tags} />
+        <h1>{title}</h1>
+        <SubInfo user_id={user_id!} />
+        <Tags tags={tags} />
       </div>
-      <PostActionButtons id={post.id} />
-      <div
-        className="postContent"
-        dangerouslySetInnerHTML={{ __html: post.body }}
-      />
+      <PostActionButtons id={id!} />
+      <div className="postContent" dangerouslySetInnerHTML={{ __html: body }} />
     </div>
   );
 };

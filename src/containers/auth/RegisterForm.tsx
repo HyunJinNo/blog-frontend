@@ -14,10 +14,14 @@ type MyProps = {
   auth: {} | null;
   authError: AxiosError | null;
   user: { id: number; username: string | null; userError: AxiosError | null };
-  changeField: (form: string, key: string, value: string) => void;
-  initializeForm: (form: string) => void;
-  register: (username: string, password: string) => void;
-  check: () => void;
+  changeField: (
+    form: string,
+    key: string,
+    value: string,
+  ) => ReturnType<typeof changeField>;
+  initializeForm: (form: string) => ReturnType<typeof initializeForm>;
+  register: (username: string, password: string) => ReturnType<typeof register>;
+  check: () => ReturnType<typeof check>;
 };
 
 const RegisterForm = ({

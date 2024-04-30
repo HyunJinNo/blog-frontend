@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 
 type MyProps = {
   user: { id: number; username: string | null; userError: AxiosError | null };
-  logout: () => void;
+  logout: () => ReturnType<typeof logout>;
 };
 
 const HeaderContainer = ({ user, logout }: MyProps) => {

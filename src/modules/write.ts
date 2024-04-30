@@ -76,7 +76,7 @@ export const updatePost = (
 };
 
 const writePostSaga = createRequestSaga(WRITE_POST, postsAPI.writePost);
-const loadPostSaga = createRequestSaga(LOAD_POST, postsAPI.readPostFromClient);
+const loadPostSaga = createRequestSaga(LOAD_POST, postsAPI.readPost);
 const updatePostSaga = createRequestSaga(UPDATE_POST, postsAPI.updatePost);
 
 export function* writeSaga() {

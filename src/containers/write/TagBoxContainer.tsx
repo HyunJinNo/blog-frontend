@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 
 type MyProps = {
   tags: string[];
-  changeField: (key: string, value: string[]) => void;
+  changeField: (key: string, value: string[]) => ReturnType<typeof changeField>;
 };
 
 const TagBoxContainer = ({ tags, changeField }: MyProps) => {

@@ -10,7 +10,11 @@ import { connect } from "react-redux";
 
 type MyProps = {
   write: WriteState;
-  writePost: (title: string, body: string, tags: string[]) => void;
+  writePost: (
+    title: string,
+    body: string,
+    tags: string[],
+  ) => ReturnType<typeof writePost>;
 };
 
 const WriteActionButtonsContainer = ({ write, writePost }: MyProps) => {
