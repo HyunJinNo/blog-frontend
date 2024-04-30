@@ -1,7 +1,7 @@
 import Responsive from "@/components/common/Responsive";
-import WriteActionButtonsContainer from "@/containers/edit/WriteActionButtonsContainer";
-import EditorContainer from "@/containers/write/EditorContainer";
-import TagBoxContainer from "@/containers/write/TagBoxContainer";
+import EditorContainer from "@/containers/edit/EditorContainer";
+import TagBoxContainer from "@/containers/edit/TagBoxContainer";
+import UpdateActionButtonsContainer from "@/containers/edit/UpdateActionButtonsContainer";
 
 type MyProps = {
   params: { id: string };
@@ -17,7 +17,7 @@ export default function EditPage({ params: { id } }: MyProps) {
     <Responsive>
       <EditorContainer />
       <TagBoxContainer />
-      <WriteActionButtonsContainer />
+      <UpdateActionButtonsContainer />
     </Responsive>
   );
 }

@@ -3,7 +3,7 @@
 import WriteActionButtons from "@/components/write/WriteActionButtons";
 import { WriteState } from "@/constants/redux/types";
 import { RootType } from "@/modules";
-import { writePost } from "@/modules/write";
+import { initialize, writePost } from "@/modules/write";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
@@ -15,9 +15,14 @@ type MyProps = {
     body: string,
     tags: string[],
   ) => ReturnType<typeof writePost>;
+  initialize: () => ReturnType<typeof initialize>;
 };
 
-const WriteActionButtonsContainer = ({ write, writePost }: MyProps) => {
+const WriteActionButtonsContainer = ({
+  write,
+  writePost,
+  initialize,
+}: MyProps) => {
   const { title, body, tags, post, postError } = write;
   const router = useRouter();
 
@@ -30,6 +35,13 @@ const WriteActionButtonsContainer = ({ write, writePost }: MyProps) => {
   const onCancel = () => {
     router.back(); // 이전 페이지로 이동
   };
+
+  // 페이지에서 벗어났을 경우 초기화함.
+  useEffect(() => {
+    return () => {
+      initialize();
+    };
+  }, [initialize]);
 
   // 성공 또는 실패 시 수행할 작업
   useEffect(() => {
@@ -49,5 +61,5 @@ export default connect(
   ({ write }: RootType) => ({
     write: write,
   }),
-  { writePost },
+  { writePost, initialize },
 )(WriteActionButtonsContainer);

@@ -68,7 +68,7 @@ const initialState: UserState = {
   userError: null,
 };
 
-export const user = (state = initialState, action: UserAction) => {
+const user = (state = initialState, action: UserAction) => {
   switch (action.type) {
     case TEMP_SET_USER:
       return produce(state, (draft: Draft<any>) => {
@@ -97,3 +97,5 @@ export const user = (state = initialState, action: UserAction) => {
       return state;
   }
 };
+
+export default user;
