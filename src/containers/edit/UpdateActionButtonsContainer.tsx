@@ -19,13 +19,13 @@ type MyProps = {
 };
 
 const UpdateActionButtonsContainer = ({ postState, updatePost }: MyProps) => {
-  const { title, body, tags, post, postError, isUpdated } = postState;
+  const { post, postError, isUpdated } = postState;
   const router = useRouter();
   const params = useParams<{ id: string }>();
 
   // 포스트 수정
   const onPublish = () => {
-    updatePost(Number(params.id), title, body, tags);
+    updatePost(Number(params.id), post?.title, post?.body, post?.tags);
   };
 
   // 취소

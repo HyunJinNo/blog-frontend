@@ -4,5 +4,6 @@ export type Post = {
   body: string;
   tags: string[];
   user_id: number;
+  username: string;
   date: string;
 };

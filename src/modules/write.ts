@@ -56,7 +56,6 @@ const write = (state = initialState, action: WriteAction) => {
       return produce(state, (draft: Draft<any>) => {
         draft.post = {
           id: action.payload.id,
-          user_id: action.payload.user_id,
         };
       });
     case WRITE_POST_FAILURE:

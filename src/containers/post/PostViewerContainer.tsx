@@ -1,36 +1,29 @@
 "use client";
 
 import PostViewer from "@/components/post/PostViewer";
+import { Post } from "@/constants/api/types";
 import { removePost } from "@/lib/api/posts";
 import { RootType } from "@/modules";
-import { loadPost } from "@/modules/post";
+import { loadPost, unloadPost } from "@/modules/post";
 import { AxiosError } from "axios";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { connect } from "react-redux";
 
 type MyProps = {
-  id?: number;
-  title: string;
-  body: string;
-  tags: string[];
-  date: string;
-  user_id?: number;
+  post: Post | null;
   postError: AxiosError | null;
-  userId: number;
+  currentUsername?: string | null;
   loadPost: (id: number) => ReturnType<typeof loadPost>;
+  unloadPost: () => ReturnType<typeof unloadPost>;
 };
 
 const PostViewerContainer = ({
-  id,
-  title,
-  body,
-  tags,
-  date,
-  user_id, // 포스트를 작성한 아이디
+  post,
   postError,
-  userId, // 현재 로그인한 아이디
+  currentUsername, // 현재 로그인한 username
   loadPost,
+  unloadPost,
 }: MyProps) => {
   const params = useParams<{ id: string }>();
   const router = useRouter();
@@ -45,6 +38,12 @@ const PostViewerContainer = ({
     }
   }, [postError]);
 
+  useEffect(() => {
+    return () => {
+      unloadPost();
+    };
+  }, [unloadPost]);
+
   const onRemove = async () => {
     try {
       await removePost(Number(params.id));
@@ -57,13 +56,8 @@ const PostViewerContainer = ({
 
   return (
     <PostViewer
-      id={id}
-      title={title}
-      body={body}
-      tags={tags}
-      date={date}
-      user_id={user_id}
-      userId={userId}
+      post={post}
+      currentUsername={currentUsername}
       onRemove={onRemove}
     />
   );
@@ -71,14 +65,9 @@ const PostViewerContainer = ({
 
 export default connect(
   ({ post, user }: RootType) => ({
-    id: post.post?.id,
-    title: post.title,
-    body: post.body,
-    tags: post.tags,
-    date: post.date,
-    user_id: post.post?.user_id,
+    post: post.post,
     postError: post.postError,
-    userId: user.id,
+    currentUsername: user.username,
   }),
-  { loadPost },
+  { loadPost, unloadPost },
 )(PostViewerContainer);

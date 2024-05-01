@@ -27,8 +27,8 @@ const EditorContainer = ({
 
 export default connect(
   ({ post }: RootType) => ({
-    title: post.title,
-    body: post.body,
+    title: post.post?.title ?? "",
+    body: post.post?.body ?? "",
   }),
   { changeField },
 )(EditorContainer);

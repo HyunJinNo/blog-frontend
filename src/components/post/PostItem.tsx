@@ -14,7 +14,7 @@ const PostItem = ({ post }: MyProps) => {
       <Link className="title" href={`/posts/${post.id}`}>
         {post.title}
       </Link>
-      <SubInfo user_id={post.user_id} date={post.date} />
+      <SubInfo username={post.username} date={post.date} />
       <Tags tags={post.tags} />
       <p>{post.body}</p>
     </div>

@@ -2,37 +2,29 @@ import "@/styles/PostViewer.scss";
 import SubInfo from "../common/SubInfo";
 import Tags from "../common/Tags";
 import PostActionButtons from "./PostActionButtons";
+import { Post } from "@/constants/api/types";
 
 type MyProps = {
-  id?: number;
-  title: string;
-  body: string;
-  tags: string[];
-  date: string;
-  user_id?: number; // 포스트를 작성한 아이디
-  userId: number; // 현재 로그인한 아이디
+  post: Post | null;
+  currentUsername?: string | null; // 현재 로그인한 username
   onRemove: () => void;
 };
 
-const PostViewer = ({
-  id,
-  title,
-  body,
-  tags,
-  date,
-  user_id,
-  userId,
-  onRemove,
-}: MyProps) => {
+const PostViewer = ({ post, currentUsername, onRemove }: MyProps) => {
   return (
     <div className="PostViewer">
       <div className="postHead">
-        <h1>{title}</h1>
-        <SubInfo user_id={user_id!} date={date} />
-        <Tags tags={tags} />
+        <h1>{post?.title}</h1>
+        <SubInfo username={post?.username} date={post?.date ?? ""} />
+        <Tags tags={post?.tags ?? []} />
       </div>
-      {user_id === userId && <PostActionButtons id={id!} onRemove={onRemove} />}
-      <div className="postContent" dangerouslySetInnerHTML={{ __html: body }} />
+      {post?.username === currentUsername && (
+        <PostActionButtons id={post?.id ?? 0} onRemove={onRemove} />
+      )}
+      <div
+        className="postContent"
+        dangerouslySetInnerHTML={{ __html: post?.body ?? "" }}
+      />
     </div>
   );
 };

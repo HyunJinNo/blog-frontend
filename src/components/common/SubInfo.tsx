@@ -1,15 +1,15 @@
 import "@/styles/SubInfo.scss";
 
 type MyProps = {
-  user_id: number;
+  username?: string;
   date: string;
 };
 
-const SubInfo = ({ user_id, date }: MyProps) => {
+const SubInfo = ({ username, date }: MyProps) => {
   return (
     <div className="SubInfo">
       <span>
-        <b>{user_id}</b>
+        <b>{username}</b>
       </span>
       <span>{new Date(date).toLocaleString()}</span>
     </div>

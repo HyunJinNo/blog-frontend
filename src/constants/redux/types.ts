@@ -53,11 +53,7 @@ export type WriteAction = {
   payload: {
     key: string;
     value: string | string[];
-    title: string;
-    body: string;
-    tags: string[];
     id: number;
-    user_id: number;
   };
   error: AxiosError;
 };
@@ -68,7 +64,6 @@ export type WriteState = {
   tags: string[];
   post: {
     id: number;
-    user_id: number;
   } | null;
   postError: AxiosError | null;
 };
@@ -84,19 +79,13 @@ export type PostAction = {
     tags: string[];
     date: string;
     user_id: number;
+    username: string;
   };
   error: AxiosError;
 };
 
 export type PostState = {
-  title: string;
-  body: string;
-  tags: string[];
-  date: string;
-  post: {
-    id: number;
-    user_id: number;
-  } | null;
+  post: Post | null;
   postError: AxiosError | null;
   isUpdated: boolean;
 };

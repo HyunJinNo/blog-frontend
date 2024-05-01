@@ -57,10 +57,6 @@ export function* postSaga() {
 }
 
 const initialState: PostState = {
-  title: "",
-  body: "",
-  tags: [],
-  date: "",
   post: null,
   postError: null,
   isUpdated: false,
@@ -77,13 +73,14 @@ const post = (state = initialState, action: PostAction) => {
       return initialState;
     case LOAD_POST_SUCCESS:
       return produce(state, (draft: Draft<any>) => {
-        draft.title = action.payload.title;
-        draft.body = action.payload.body;
-        draft.tags = action.payload.tags;
-        draft.date = action.payload.date;
         draft.post = {
           id: action.payload.id,
+          title: action.payload.title,
+          body: action.payload.body,
+          tags: action.payload.tags,
           user_id: action.payload.user_id,
+          username: action.payload.username,
+          date: action.payload.date,
         };
       });
     case LOAD_POST_FAILURE:

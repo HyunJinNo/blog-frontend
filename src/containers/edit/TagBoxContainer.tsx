@@ -20,7 +20,7 @@ const TagBoxContainer = ({ tags, changeField }: MyProps) => {
 
 export default connect(
   ({ post }: RootType) => ({
-    tags: post.tags,
+    tags: post.post?.tags ?? [],
   }),
   { changeField },
 )(TagBoxContainer);
