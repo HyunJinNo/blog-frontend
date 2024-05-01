@@ -2,7 +2,6 @@ import createRequestSaga from "@/lib/createRequestSaga";
 import * as authAPI from "@/lib/api/auth";
 import { call, takeLatest } from "redux-saga/effects";
 import { Draft, produce } from "immer";
-import { AxiosError } from "axios";
 import { UserAction, UserState } from "@/constants/redux/types";
 
 // 새로고침 이후 임시 로그인 처리
@@ -88,11 +87,7 @@ const user = (state = initialState, action: UserAction) => {
         draft.checkError = action.error;
       });
     case LOGOUT:
-      return produce(state, (draft: Draft<any>) => {
-        draft.id = -1;
-        draft.username = null;
-        draft.checkError = null;
-      });
+      return initialState;
     default:
       return state;
   }

@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 
 type MyProps = {
   write: WriteState;
+  username: string | null;
   writePost: (
     title: string,
     body: string,
@@ -20,6 +21,7 @@ type MyProps = {
 
 const WriteActionButtonsContainer = ({
   write,
+  username,
   writePost,
   initialize,
 }: MyProps) => {
@@ -35,6 +37,13 @@ const WriteActionButtonsContainer = ({
   const onCancel = () => {
     router.back(); // 이전 페이지로 이동
   };
+
+  // 로그인을 하지 않은 경우 로그인 화면으로 이동함.
+  useEffect(() => {
+    if (username === null) {
+      router.replace("/login");
+    }
+  }, [router, username]);
 
   // 페이지에서 벗어났을 경우 초기화함.
   useEffect(() => {
@@ -57,8 +66,9 @@ const WriteActionButtonsContainer = ({
 };
 
 export default connect(
-  ({ write }: RootType) => ({
+  ({ write, user }: RootType) => ({
     write: write,
+    username: user.username,
   }),
   { writePost, initialize },
 )(WriteActionButtonsContainer);
