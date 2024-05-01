@@ -60,6 +60,7 @@ const initialState: PostState = {
   title: "",
   body: "",
   tags: [],
+  date: "",
   post: null,
   postError: null,
   isUpdated: false,
@@ -79,6 +80,7 @@ const post = (state = initialState, action: PostAction) => {
         draft.title = action.payload.title;
         draft.body = action.payload.body;
         draft.tags = action.payload.tags;
+        draft.date = action.payload.date;
         draft.post = {
           id: action.payload.id,
           user_id: action.payload.user_id,

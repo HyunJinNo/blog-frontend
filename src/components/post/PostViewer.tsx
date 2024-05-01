@@ -8,6 +8,7 @@ type MyProps = {
   title: string;
   body: string;
   tags: string[];
+  date: string;
   user_id?: number; // 포스트를 작성한 아이디
   userId: number; // 현재 로그인한 아이디
   onRemove: () => void;
@@ -18,6 +19,7 @@ const PostViewer = ({
   title,
   body,
   tags,
+  date,
   user_id,
   userId,
   onRemove,
@@ -26,7 +28,7 @@ const PostViewer = ({
     <div className="PostViewer">
       <div className="postHead">
         <h1>{title}</h1>
-        <SubInfo user_id={user_id!} />
+        <SubInfo user_id={user_id!} date={date} />
         <Tags tags={tags} />
       </div>
       {user_id === userId && <PostActionButtons id={id!} onRemove={onRemove} />}

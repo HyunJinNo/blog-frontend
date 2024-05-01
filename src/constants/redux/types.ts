@@ -82,6 +82,7 @@ export type PostAction = {
     title: string;
     body: string;
     tags: string[];
+    date: string;
     user_id: number;
   };
   error: AxiosError;
@@ -91,6 +92,7 @@ export type PostState = {
   title: string;
   body: string;
   tags: string[];
+  date: string;
   post: {
     id: number;
     user_id: number;

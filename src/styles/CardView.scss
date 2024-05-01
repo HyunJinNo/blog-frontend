@@ -1,0 +1,13 @@
+.CardView {
+  border: none;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  &:hover {
+    transition: 0.15s margin ease-in-out;
+    margin: 0rem;
+    margin-bottom: 1rem;
+  }
+}

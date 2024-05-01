@@ -14,6 +14,7 @@ type MyProps = {
   title: string;
   body: string;
   tags: string[];
+  date: string;
   user_id?: number;
   postError: AxiosError | null;
   userId: number;
@@ -25,6 +26,7 @@ const PostViewerContainer = ({
   title,
   body,
   tags,
+  date,
   user_id, // 포스트를 작성한 아이디
   postError,
   userId, // 현재 로그인한 아이디
@@ -59,6 +61,7 @@ const PostViewerContainer = ({
       title={title}
       body={body}
       tags={tags}
+      date={date}
       user_id={user_id}
       userId={userId}
       onRemove={onRemove}
@@ -72,6 +75,7 @@ export default connect(
     title: post.title,
     body: post.body,
     tags: post.tags,
+    date: post.date,
     user_id: post.post?.user_id,
     postError: post.postError,
     userId: user.id,

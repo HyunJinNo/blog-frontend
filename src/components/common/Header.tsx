@@ -17,7 +17,7 @@ const Header = ({ user, onLogout }: MyProps) => {
     <div className="Header">
       <div className="content">
         <Link className="logo" href="/">
-          REACTERS
+          {"HyunJinNo's Blog"}
         </Link>
         {user.username ? (
           <div className="right">
