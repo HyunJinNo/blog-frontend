@@ -1,3 +1,5 @@
+import HomeImage from "@/components/home/HomeImage";
+import ProjectList from "@/components/home/ProjectList";
 import HeaderContainer from "@/containers/common/HeaderContainer";
 import Link from "next/link";
 
@@ -5,10 +7,11 @@ export default function Home() {
   return (
     <div>
       <HeaderContainer />
-      <h1>안녕하세요.</h1>
-      <Link href="/posts">포스트 목록</Link>
-      <br />
-      <Link href="/write">포스트 작성</Link>
+      <HomeImage>
+        <Link href="/posts">포스트 목록</Link>
+        <Link href="/write">포스트 작성</Link>
+      </HomeImage>
+      <ProjectList data_aos="fade-right" />
     </div>
   );
 }

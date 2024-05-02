@@ -1,6 +1,9 @@
 @import "./utils.scss";
 
 .Header {
+  position: relative;
+  z-index: 1;
+
   .content {
     position: fixed;
     width: 100%;

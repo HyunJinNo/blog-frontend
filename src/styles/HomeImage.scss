@@ -1,0 +1,21 @@
+.HomeImage {
+  margin-top: 1rem;
+  background-color: black;
+  height: 1000px;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  a {
+    color: white;
+
+    & + a {
+      padding-left: 1rem;
+    }
+
+    &:hover {
+      color: #dddddd;
+    }
+  }
+}
